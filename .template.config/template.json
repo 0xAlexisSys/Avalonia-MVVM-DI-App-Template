@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json.schemastore.org/template",
+    "$schema": "https://www.schemastore.org/template.json",
     "author": "0xAlexisSys",
     "classifications": [
         "Desktop",
