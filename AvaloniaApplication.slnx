@@ -1,0 +1,12 @@
+<Solution>
+    <Folder Name="/root/">
+        <File Path="Directory.Build.props"/>
+        <File Path=".editorconfig"/>
+        <File Path=".gitattributes"/>
+        <File Path=".gitignore"/>
+    </Folder>
+
+    <Folder Name="/src/">
+        <Project Path="src/AvaloniaApplication/AvaloniaApplication.csproj"/>
+    </Folder>
+</Solution>

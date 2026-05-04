@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "0xAlexisSys",
+    "classifications": [
+        "Desktop",
+        "Xaml",
+        "Avalonia",
+        "Windows",
+        "Linux",
+        "macOS"
+    ],
+    "identity": "0xAlexisSys.Avalonia.Application",
+    "name": "Avalonia .NET MVVM/DI App",
+    "shortName": "avalonia.mvvm.di",
+    "tags": {
+        "type": "solution",
+        "language": "C#"
+    },
+    "sourceName": "AvaloniaApplication",
+    "preferNameDirectory": true
+}

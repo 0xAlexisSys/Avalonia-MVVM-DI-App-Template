@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication.ViewModels"
+        x:Class="AvaloniaApplication.Views.AcceptDialogView"
+        x:DataType="vm:AcceptDialogViewModel"
+        Title="{Binding Title}"
+        Width="200.0"
+        Height="100.0"
+        MinWidth="{Binding MinWidth}"
+        MinHeight="{Binding MinHeight}">
+    <Panel Margin="8.0">
+        <TextBlock Text="{Binding Text}"
+                   TextWrapping="Wrap"
+                   TextAlignment="{Binding TextAlignment}"/>
+
+        <Button Content="{Binding AcceptButtonText}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Command="{Binding AcceptCommand}"
+                CommandParameter="{Binding $parent[Window]}"/>
+    </Panel>
+</Window>
