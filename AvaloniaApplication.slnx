@@ -8,5 +8,6 @@
 
     <Folder Name="/src/">
         <Project Path="src/AvaloniaApplication/AvaloniaApplication.csproj"/>
+        <Project Path="src/AvaloniaApplication.SourceGenerators/AvaloniaApplication.SourceGenerators.csproj"/>
     </Folder>
 </Solution>

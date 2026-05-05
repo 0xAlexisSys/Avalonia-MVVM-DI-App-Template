@@ -1,19 +1,21 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using AvaloniaApplication.Attributes;
 using AvaloniaApplication.Views;
 
 namespace AvaloniaApplication;
 
-public sealed class App : Application
+public sealed partial class App : Application
 {
+    [Service] private static partial IClassicDesktopStyleApplicationLifetime Lifetime { get; }
+    [Service] private static partial MainWindowView MainWindowView { get; }
+
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted()
     {
-        IClassicDesktopStyleApplicationLifetime lifetime = Program.GetService<IClassicDesktopStyleApplicationLifetime>();
-        lifetime.MainWindow = Program.GetService<MainWindowView>();
-
+        Lifetime.MainWindow = MainWindowView;
         base.OnFrameworkInitializationCompleted();
     }
 }
