@@ -3,7 +3,7 @@
         xmlns:vm="using:AvaloniaApplication.ViewModels"
         x:Class="AvaloniaApplication.Views.MainWindowView"
         x:DataType="vm:MainWindowViewModel"
-        Title="Application"
+        Title="AvaloniaApplication"
         Icon="/Assets/Icon.ico">
     <!-- Add content here. -->
 </Window>
