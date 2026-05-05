@@ -3,6 +3,7 @@
         <SolutionDirectory>$(MSBuildThisFileDirectory)</SolutionDirectory>
         <SourceDirectory>$(SolutionDirectory)src/</SourceDirectory>
 
+        <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <DefineConstants>$(DefineConstants);ZLINQ</DefineConstants>
         <NoWarn>$(NoWarn);IDE0130</NoWarn>
