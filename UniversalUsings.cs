@@ -10,11 +10,7 @@ global using System.Threading;
 global using System.Threading.Channels;
 #endif
 global using System.Threading.Tasks;
-#if !ZLINQ
 global using System.Linq;
-#else
-global using ZLinq;
-#endif
 
 global using s8 = sbyte;
 global using s16 = short;
