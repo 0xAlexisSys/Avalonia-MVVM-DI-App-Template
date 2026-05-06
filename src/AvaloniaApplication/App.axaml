@@ -1,13 +1,15 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:AvaloniaApplication"
+             xmlns:a="using:AvaloniaApplication"
+             xmlns:mi="using:Material.Icons.Avalonia"
              x:Class="AvaloniaApplication.App"
              RequestedThemeVariant="Default">
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <a:ViewLocator/>
     </Application.DataTemplates>
 
     <Application.Styles>
         <FluentTheme/>
+        <mi:MaterialIconStyles/>
     </Application.Styles>
 </Application>
