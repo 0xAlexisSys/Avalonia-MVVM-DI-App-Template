@@ -22,6 +22,8 @@ public static class Program
                                            .AddSingleton(StrongReferenceMessenger.Default)
                                            .AddSingleton<DialogService>()
                                            .AddSingletonViewAndViewModel<MainWindowView, MainWindowViewModel>()
+                                           .AddTransientViewAndViewModel<AcceptDialogView, AcceptDialogViewModel>(false)
+                                           .AddTransientViewAndViewModel<ConfirmationDialogView, ConfirmationDialogViewModel>(false)
                                            .BuildServiceProvider();
     });
 
