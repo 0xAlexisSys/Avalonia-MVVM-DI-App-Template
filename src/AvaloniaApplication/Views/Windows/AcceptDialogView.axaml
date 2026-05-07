@@ -1,22 +1,20 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:AvaloniaApplication.ViewModels"
         x:Class="AvaloniaApplication.Views.AcceptDialogView"
-        x:DataType="vm:AcceptDialogViewModel"
-        Title="{Binding Title}"
+        Title="Alert!"
         Width="200.0"
         Height="100.0"
-        MinWidth="{Binding MinWidth}"
-        MinHeight="{Binding MinHeight}">
+        MinWidth="200.0"
+        MinHeight="100.0">
     <Panel Margin="8.0">
-        <TextBlock Text="{Binding Text}"
+        <TextBlock x:Name="TextBlock"
                    TextWrapping="Wrap"
-                   TextAlignment="{Binding TextAlignment}"/>
+                   TextAlignment="Center"/>
 
-        <Button Content="{Binding AcceptButtonText}"
+        <Button x:Name="AcceptButton"
+                Content="OK"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Command="{Binding AcceptCommand}"
-                CommandParameter="{Binding $parent[Window]}"/>
+                Click="AcceptButton_OnClick"/>
     </Panel>
 </Window>

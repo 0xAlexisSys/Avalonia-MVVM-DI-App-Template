@@ -2,60 +2,46 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using AvaloniaApplication.Models;
-using AvaloniaApplication.ViewModels;
 using AvaloniaApplication.Views;
 
 namespace AvaloniaApplication.Services;
 
 public sealed class DialogService(IClassicDesktopStyleApplicationLifetime lifetime)
 {
-    private IStorageProvider StorageProvider
-    {
-        get
-        {
-            field ??= TopLevel.GetTopLevel(lifetime.MainWindow)!.StorageProvider;
-            return field;
-        }
-    }
+    private readonly Lazy<IStorageProvider> _storageProvider = new(() => TopLevel.GetTopLevel(lifetime.MainWindow)!.StorageProvider);
 
-    private static T CreateDialogView<T>(DialogViewModel viewModel) where T : Window
+    private static T CreateDialog<T>(DialogOptions options) where T : Window
     {
-        T view = Program.GetService<T>();
-        view.DataContext = viewModel;
-        return view;
-    }
-
-    private static T CreateDialogViewModel<T>(DialogOptions options, string defaultTitle) where T : DialogViewModel, new()
-    {
-        T viewModel = Program.GetService<T>();
-        viewModel.Title = options.Title ?? defaultTitle;
-        if (options.Text is not null) viewModel.Text = options.Text;
-        viewModel.TextAlignment = options.TextAlignment;
-        if (options.MinWidth > 0.0D) viewModel.MinWidth = options.MinWidth;
-        if (options.MinHeight > 0.0D) viewModel.MinHeight = options.MinHeight;
-        return viewModel;
+        T dialog = Program.GetService<T>();
+        if (options.Title is not null) dialog.Title = options.Title;
+        if (options.MinWidth > 0.0D) dialog.MinWidth = options.MinWidth;
+        if (options.MinHeight > 0.0D) dialog.MinHeight = options.MinHeight;
+        TextBlock content = dialog.GetControl<TextBlock>("TextBlock");
+        if (options.Text is not null) content.Text = options.Text;
+        content.TextAlignment = options.TextAlignment;
+        return dialog;
     }
 
     public async Task ShowAcceptDialogAsync(AcceptDialogOptions options)
     {
-        AcceptDialogViewModel viewModel = CreateDialogViewModel<AcceptDialogViewModel>(options, "Alert!");
-        if (options.AcceptButtonText is not null) viewModel.AcceptButtonText = options.AcceptButtonText;
+        AcceptDialogView dialog = CreateDialog<AcceptDialogView>(options);
+        if (options.AcceptButtonText is not null) dialog.AcceptButton.Content = options.AcceptButtonText;
 
-        await CreateDialogView<AcceptDialogView>(viewModel).ShowDialog(lifetime.MainWindow!);
+        await dialog.ShowDialog(lifetime.MainWindow!);
     }
 
     public async Task<bool> ShowConfirmationDialogAsync(ConfirmationDialogOptions options)
     {
-        ConfirmationDialogViewModel viewModel = CreateDialogViewModel<ConfirmationDialogViewModel>(options, "Please Confirm...");
-        if (options.CancelButtonText is not null) viewModel.CancelButtonText = options.CancelButtonText;
-        if (options.ConfirmButtonText is not null) viewModel.ConfirmButtonText = options.ConfirmButtonText;
+        ConfirmationDialogView dialog = CreateDialog<ConfirmationDialogView>(options);
+        if (options.CancelButtonText is not null) dialog.CancelButton.Content = options.CancelButtonText;
+        if (options.ConfirmButtonText is not null) dialog.ConfirmButton.Content = options.ConfirmButtonText;
 
-        return await CreateDialogView<ConfirmationDialogView>(viewModel).ShowDialog<bool>(lifetime.MainWindow!);
+        return await dialog.ShowDialog<bool>(lifetime.MainWindow!);
     }
 
-    public async Task<string[]> ShowOpenFileDialogAsync(FilePickerOpenOptions options) => [..(await StorageProvider.OpenFilePickerAsync(options)).Select(static file => file.Path.AbsolutePath)];
+    public async Task<string[]> ShowOpenFileDialogAsync(FilePickerOpenOptions options) => [..(await _storageProvider.Value.OpenFilePickerAsync(options)).Select(static file => file.Path.AbsolutePath)];
 
-    public async Task<string?> ShowSaveFileDialogAsync(FilePickerSaveOptions options) => (await StorageProvider.SaveFilePickerAsync(options))?.Path.AbsolutePath;
+    public async Task<string?> ShowSaveFileDialogAsync(FilePickerSaveOptions options) => (await _storageProvider.Value.SaveFilePickerAsync(options))?.Path.AbsolutePath;
 
-    public async Task<string[]> ShowOpenDirectoryDialogAsync(FolderPickerOpenOptions options) => [..(await StorageProvider.OpenFolderPickerAsync(options)).Select(static folder => folder.Path.AbsolutePath)];
+    public async Task<string[]> ShowOpenDirectoryDialogAsync(FolderPickerOpenOptions options) => [..(await _storageProvider.Value.OpenFolderPickerAsync(options)).Select(static folder => folder.Path.AbsolutePath)];
 }
