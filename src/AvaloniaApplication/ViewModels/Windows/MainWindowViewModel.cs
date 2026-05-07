@@ -1,3 +1,5 @@
-﻿namespace AvaloniaApplication.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public sealed partial class MainWindowViewModel : ViewModel {}
+namespace AvaloniaApplication.ViewModels;
+
+public sealed partial class MainWindowViewModel : ObservableObject {}

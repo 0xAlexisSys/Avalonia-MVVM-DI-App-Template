@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using AvaloniaApplication.ViewModels;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AvaloniaApplication;
 
@@ -8,7 +8,7 @@ public sealed class ViewLocator : IDataTemplate
 {
     private static readonly Dictionary<Type, Type> _registeredViews = [];
 
-    public static void RegisterView<TView, TViewModel>() where TView : Control where TViewModel : ViewModel => _registeredViews.Add(typeof(TViewModel), typeof(TView));
+    public static void RegisterView<TView, TViewModel>() where TView : Control where TViewModel : ObservableObject => _registeredViews.Add(typeof(TViewModel), typeof(TView));
 
     public Control Build(object? data)
     {
@@ -20,5 +20,5 @@ public sealed class ViewLocator : IDataTemplate
         return viewType is not null ? Program.GetService<Control>(viewType) : new TextBlock {Text = $"No view for {viewModelType.FullName ?? UnknownViewModelName}"};
     }
 
-    public bool Match(object? data) => data is ViewModel;
+    public bool Match(object? data) => data is ObservableObject;
 }
