@@ -14,7 +14,7 @@ public sealed class ServiceAttributeGenerator : IIncrementalGenerator
             "AvaloniaApplication.Attributes.ServiceAttribute",
             static (node, _) => node is PropertyDeclarationSyntax,
             static (context, _) => context.SemanticModel.GetDeclaredSymbol((PropertyDeclarationSyntax)context.TargetNode) is IPropertySymbol {IsStatic: true, IsReadOnly: true} propertySymbol
-                                       ? new PropertyData(propertySymbol.Name, $"_lazy{propertySymbol.Name}", propertySymbol.Type.ToDisplayString(), AccessibilityMap[propertySymbol.DeclaredAccessibility], propertySymbol.ContainingType.Name, propertySymbol.ContainingNamespace)
+                                       ? new PropertyData(propertySymbol.Name, $"_service{propertySymbol.Name}", propertySymbol.Type.ToDisplayString(), AccessibilityMap[propertySymbol.DeclaredAccessibility], propertySymbol.ContainingType.Name, propertySymbol.ContainingNamespace)
                                        : null
         ).Where(static propertyData => propertyData is not null)!;
 
