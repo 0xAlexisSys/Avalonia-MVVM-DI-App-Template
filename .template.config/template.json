@@ -17,5 +17,22 @@
         "language": "C#"
     },
     "sourceName": "AvaloniaApplication",
-    "preferNameDirectory": true
+    "preferNameDirectory": true,
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [
+                        "**/.build/**/*",
+                        "**/bin/**/*",
+                        "**/obj/**/*",
+                        "**/.vs/**/*",
+                        "**/.idea/**/*",
+                        "**/.template.config/**/*",
+                        "**/.git/**/*"
+                    ]
+                }
+            ]
+        }
+    ]
 }
