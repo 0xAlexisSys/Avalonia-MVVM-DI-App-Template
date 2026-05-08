@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
-        <OutputType>WinExe</OutputType>
         <ApplicationManifest>App.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <OutputType>WinExe</OutputType>
         <SelfContained>true</SelfContained>
         <PublishSingleFile>true</PublishSingleFile>
     </PropertyGroup>
