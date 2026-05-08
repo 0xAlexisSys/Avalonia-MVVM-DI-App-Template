@@ -6,6 +6,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <NoWarn>$(NoWarn);IDE0130</NoWarn>
+        <DefaultItemExcludes>$(DefaultItemExcludes);**\*.DotSettings;**\*.DotSettings.user</DefaultItemExcludes>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <BaseIntermediateOutputPath>$(MSBuildProjectDirectory)/.build/obj/</BaseIntermediateOutputPath>
         <BaseOutputPath>$(MSBuildProjectDirectory)/.build/bin/</BaseOutputPath>
