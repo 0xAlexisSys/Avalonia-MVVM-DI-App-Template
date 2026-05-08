@@ -19,6 +19,7 @@ global using s64 = long;
 #if NET7_0_OR_GREATER
 global using s128 = System.Int128;
 #endif
+global using nS = nint;
 global using u8 = byte;
 global using u16 = ushort;
 global using u32 = uint;
@@ -26,6 +27,7 @@ global using u64 = ulong;
 #if NET7_0_OR_GREATER
 global using u128 = System.UInt128;
 #endif
+global using nU = nuint;
 global using iLG = System.Numerics.BigInteger;
 #if NET5_0_OR_GREATER
 global using f16 = System.Half;
